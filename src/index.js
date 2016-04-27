@@ -1,4 +1,6 @@
 import BABYLON from 'Babylonjs';
+import Settings from './Settings';
+import BuildingFactory from './BuildingFactory';
 
 window.addEventListener('DOMContentLoaded', function() {
   let canvas = document.getElementById('renderCanvas');
@@ -20,34 +22,13 @@ window.addEventListener('DOMContentLoaded', function() {
 
     new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(0, 1, 0), scene);
 
-    let buildingMat = new BABYLON.StandardMaterial('texture1', scene);
-    buildingMat.diffuseTexture = new BABYLON.Texture('../assets/textures/building.jpg', scene);
-    buildingMat.diffuseTexture.uScale = 5.0;
-    buildingMat.diffuseTexture.vScale = 5.0;
-
-    let minPos = -80;
-    let maxPos = 80;
-
     let buildings = [];
-    for (var index = 0; index < 1000; index++) {
-      let building = BABYLON.Mesh.CreateBox('building' + index, 1, scene);
-
-      let height = getRandomArbitrary(2, 20);
-      let size = getRandomArbitrary(2, 4);
-      building.scaling = new BABYLON.Vector3(size, height, size);
-
-      building.position = new BABYLON.Vector3(getRandomArbitrary(minPos, maxPos), building.scaling.y / 2, getRandomArbitrary(minPos, maxPos));
-      building.rotation.y = getRandomArbitrary(-5, 5);
-
-      building.material = buildingMat;
-      buildings.push(building);
+    let buildingFactory = new BuildingFactory(scene);
+    for (var index = 0; index < Settings.NUMBER_OF_BUILDING; index++) {
+      buildings.push(buildingFactory.getRndBuilding());
     }
 
     BABYLON.Mesh.MergeMeshes(buildings, true, true);
-
-    function getRandomArbitrary(min, max) {
-      return Math.random() * (max - min) + min;
-    }
 
     let groundMat = new BABYLON.StandardMaterial('texture1', scene);
     groundMat.diffuseTexture = new BABYLON.Texture('../assets/textures/ground.jpg', scene);
