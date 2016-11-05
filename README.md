@@ -4,7 +4,7 @@ A basic procedural 3D city built with Babylonjs
 
 ## Installation
 ```
-$ git clone https://github.com/SuperCoac/basic-procedural-city
+$ git clone https://github.com/Coac/basic-procedural-city
 $ cd basic-procedural-city
 $ npm install
 ```
