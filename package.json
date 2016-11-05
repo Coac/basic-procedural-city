@@ -9,7 +9,7 @@
     "build": "node webpack/build.js"
   },
   "keywords": [],
-  "author": "Victor Le SuperCoac",
+  "author": "Victor Le",
   "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.7.6",
